@@ -1,0 +1,1 @@
+var _messageMod = angular.module('messageMod',['coreMod', 'mod/message/views','ui.bootstrap']);
