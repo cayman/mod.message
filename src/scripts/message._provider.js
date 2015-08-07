@@ -8,8 +8,8 @@ _messageMod.provider('messageMod', function () {
     var _infoTemplate = null;
     var _errorTemplate = null;
     var _fatalTemplate = null;
-    var _loadTemplate = null;
-    var _loadRoundTemplate = null;
+    var _loadingTemplate = null;
+    var _loadingRoundTemplate = null;
 
     this.setInfoTemplate = function (template) {
         _infoTemplate = template;
@@ -23,13 +23,13 @@ _messageMod.provider('messageMod', function () {
         _fatalTemplate = template;
     };
 
-    this.setLoadTemplate = function (template) {
-        _loadTemplate = template;
+    this.setLoadingTemplate = function (template) {
+        _loadingTemplate = template;
     };
 
 
-    this.setLoadRoundTemplate = function (template) {
-        _loadRoundTemplate = template;
+    this.setLoadingRoundTemplate = function (template) {
+        _loadingRoundTemplate = template;
     };
 
     var _modalConfig = null;
@@ -74,11 +74,11 @@ _messageMod.provider('messageMod', function () {
             getFatalTemplate: function () {
                 return _fatalTemplate;
             },
-            getLoadTemplate: function () {
-                return _loadTemplate;
+            getLoadingTemplate: function () {
+                return _loadingTemplate;
             },
             getLoadRoundTemplate: function () {
-                return _loadRoundTemplate;
+                return _loadingRoundTemplate;
             },
             showInfo: function (text, title) {
                 showMessageEvent('info', title, text);
@@ -99,10 +99,19 @@ _messageMod.provider('messageMod', function () {
                 hideMessageEvent('fatal');
             },
 
+            showElement: function (element,animateTime){
+               element.css('display','block');
+                //element.animate({height: 'show'}, messageMod.getAnimateTime());
+            },
+            hideElement: function (element,animateTime){
+                element.css('display','none');
+                //element.animate({height: 'hide'}, messageMod.getAnimateTime());
+            },
             showModalWindow: function (title, text) {
                 var message = {
                     title: title,
-                    text: text
+                    text: text,
+                    close: _config.message.close || 'Close'
                 };
                 _modalConfig.resolve = {
                     message: function () {
@@ -119,6 +128,7 @@ _messageMod.provider('messageMod', function () {
                     }
                 });
             },
+
             subscribeHideMessage: function (level, callback) {
                 $rootScope.$on('message:hide', function (event, message) {
                     if (message.level === level) {
@@ -129,11 +139,8 @@ _messageMod.provider('messageMod', function () {
             getAnimateTime: function () {
                 return _config.animateTime;
             },
-            getLoadText: function () {
-                return _config.loadText;
-            },
-            getSearchText: function () {
-                return _config.searchText;
+            getMessage: function () {
+                return _config.message;
             }
         };
     };

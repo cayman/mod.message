@@ -1,4 +1,6 @@
 name: message
 animateTime: 400
-loadText: 'Загружаем...'
-searchText: 'Ищем...'
+message:
+  loading: 'Загружаем...'
+  looking: 'Ищем...'
+  close: 'Закрыть'

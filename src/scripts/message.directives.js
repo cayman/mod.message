@@ -5,13 +5,13 @@ _messageMod.directive('messageInfo', ['$log', 'messageMod', function ($log, mess
         restrict: 'EA',
         link: function (scope, element, attrs) {
             scope.message = {};
-            element.hide();
+            messageMod.hideElement(element);
             function showInfoMessage(message) {
                 scope.message = message;
-                element.show();
+                messageMod.showElement(element);
             }
             function hideInfoMessage(){
-                element.hide();
+                messageMod.hideElement(element);
             }
             messageMod.subscribeShowMessage('info',showInfoMessage);
             messageMod.subscribeHideMessage('info',hideInfoMessage);
@@ -24,14 +24,15 @@ _messageMod.directive('messageError', ['$log', 'messageMod', function ($log, mes
         templateUrl: messageMod.getErrorTemplate(),
         restrict: 'EA',
         link: function (scope, element, attrs) {
-            scope.message = {};
-            element.hide();
+            scope.message = null;
+            messageMod.hideElement(element);
             function showErrorMessage(message) {
                 scope.message = message;
-                element.show();
+                $log.debug('show',message);
+                messageMod.showElement(element);
             }
             function hideErrorMessage(){
-                element.hide();
+                messageMod.hideElement(element);
             }
             messageMod.subscribeShowMessage('error',showErrorMessage);
             messageMod.subscribeHideMessage('error',hideErrorMessage);
@@ -45,16 +46,14 @@ _messageMod.directive('messageFatal', ['$log', 'messageMod', function ($log, mes
         restrict: 'EA',
         link: function (scope, element, attrs) {
             scope.message = {};
-            element.hide();
+            messageMod.hideElement(element);
             function showFatalMessage(message) {
                 scope.message = message;
-                element.show();
-                //element.animate({height: 'show'}, messageMod.getAnimateTime());
+                messageMod.showElement(element,messageMod.getAnimateTime());
+
             }
             function hideFatalMessage(){
-                element.hide();
-                //$log.debug('hideFatalMessage()');
-                //element.animate({height: 'hide'}, messageMod.getAnimateTime());
+                messageMod.hideElement(element,messageMod.getAnimateTime());
             }
             messageMod.subscribeShowMessage('fatal',showFatalMessage);
             messageMod.subscribeHideMessage('fatal',hideFatalMessage);
@@ -62,34 +61,34 @@ _messageMod.directive('messageFatal', ['$log', 'messageMod', function ($log, mes
     };
 }]);
 
-_messageMod.directive('messageLoad', ['$log', 'messageMod', function ($log, messageMod) {
-    $log.info('message-load.directive');
+_messageMod.directive('messageLoading', ['$log', 'messageMod', function ($log, messageMod) {
+    $log.info('message-loading.directive');
     return {
-        templateUrl: messageMod.getLoadTemplate(),
+        templateUrl: messageMod.getLoadingTemplate(),
         restrict: 'EA',
         link: function (scope, element, attrs) {
-            scope.message = messageMod.getLoadText();
+            scope.message = messageMod.getMessage().loading || 'Loading...';
             scope.assets = messageMod.getAssets();
         }
     };
 }]);
 
-_messageMod.directive('messageSearch', ['$log', 'messageMod', function ($log, messageMod) {
-    $log.info('message-search.directive');
+_messageMod.directive('messageLooking', ['$log', 'messageMod', function ($log, messageMod) {
+    $log.info('message-looking.directive');
     return {
-        templateUrl: messageMod.getLoadTemplate(),
+        templateUrl: messageMod.getLoadingTemplate(),
         restrict: 'EA',
         link: function (scope, element, attrs) {
-            scope.message = messageMod.getSearchText();
+            scope.message = messageMod.getMessage().looking || 'Looking...';
             scope.assets = messageMod.getAssets();
         }
     };
 }]);
 
-_messageMod.directive('messageLoadRound', ['$log', 'messageMod', function ($log, messageMod) {
+_messageMod.directive('messageLoadingRound', ['$log', 'messageMod', function ($log, messageMod) {
     $log.info('message-load-round.directive');
     return {
-        templateUrl: messageMod.getLoadRoundTemplate(),
+        templateUrl: messageMod.getLoadingRoundTemplate(),
         restrict: 'EA',
         link: function (scope, element, attrs) {
             scope.assets = messageMod.getAssets();

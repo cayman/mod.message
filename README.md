@@ -5,8 +5,8 @@
 
 ## Зависимости
 
- - [Библиотека angular-bootstrap](https://github.com/angular-ui/bootstrap) ( "angular-bootstrap": "~0.8.0"),
- - [Компонета mod.core](mode_core/mod/core)
+ - [Библиотека angular-bootstrap](https://github.com/angular-ui/bootstrap)
+ - [Компонета mod.core](https://github.com/cayman/mode.core)
 
 # Функции настройки провайдера
 
@@ -14,8 +14,8 @@
     messageModProvider.setInfoTemplate('mod/message/views/info.html');
     messageModProvider.setErrorTemplate('mod/message/views/error.html');
     messageModProvider.setFatalTemplate('mod/message/views/fatal.html');
-    messageModProvider.setLoadTemplate('mod/message/views/load.html');
-    messageModProvider.setLoadRoundTemplate('mod/message/views/load-round.html');
+    messageModProvider.setLoadingTemplate('mod/message/views/loading.html');
+    messageModProvider.setLoadingRoundTemplate('mod/message/views/loading-round.html');
     messageModProvider.setModalConfig({
         backdrop: true,
         dialogFade: true,
@@ -26,32 +26,29 @@
     });
 
 
-# Визуальный элемент messageSearch(директива message-search)
+# Визуальный элемент messageLooking (директива message-looking)
+Отображает процесс поиска.
 Задается как элемент или атрибут
 
-    <message-search ng-if="result.processSearching"></message-search>
+    <message-looking ng-if="result.processSearching"></message-looking>
 
 Свойства настройки в **config.yml**:
 
-    searchText: 'Ищем...'
+    message:
+        looking: 'Ищем...'
     
-# Визуальный элемент messageLoad (директива message-load)
-Отображает процесс загрузки.
+# Визуальный элемент messageLoading (директива message-loading, message-loading-round)
+Отображает процесс загрузки
 Задается как элемент или атрибут
-
-    <message-load ng-if="result.processSearching"></message-load>
+    
+    <message-loading ng-if="result.processSearching"></message-loading>
+    <message-loading-round ng-if="result.processSearching"></message-loading-round>
 
 Свойства настройки в **config.yml**:
 
-    loadText: 'Загружаем...'
-    
-# Визуальный элемент messageLoad (директива message-load)
-Отображает процесс загрузки.
-Задается как элемент или атрибут
-    
-    <message-load-round ng-if="result.processSearching"></message-load-round>
+   message:
+       loading: 'Загружаем...'
 
-    
 # Визуальный сообщения messageInfo, messageError, messageFatal 
 методы отображения и сокрытия:
 

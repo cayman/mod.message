@@ -1,13 +1,13 @@
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">×</button>
-        <h4 class="modal-title">{{ message.title }}</h4>
+        <h4 ng-show="message.title" class="modal-title">{{ message.title }}</h4>
     </div>
     <div class="modal-body">
         <p ng-bind-html="message.text"></p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Закрыть</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">message.close</button>
     </div>
 </div>
 

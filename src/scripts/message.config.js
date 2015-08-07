@@ -4,8 +4,8 @@ _messageMod.config(['messageModProvider', function (messageModProvider) {
     messageModProvider.setInfoTemplate('mod/message/views/info.html');
     messageModProvider.setErrorTemplate('mod/message/views/error.html');
     messageModProvider.setFatalTemplate('mod/message/views/fatal.html');
-    messageModProvider.setLoadTemplate('mod/message/views/load.html');
-    messageModProvider.setLoadRoundTemplate('mod/message/views/load-round.html');
+    messageModProvider.setLoadingTemplate('mod/message/views/load.html');
+    messageModProvider.setLoadingRoundTemplate('mod/message/views/load-round.html');
     messageModProvider.setModalConfig({
         backdrop: true,
         dialogFade: true,
